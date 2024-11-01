@@ -1,5 +1,6 @@
 package com.example.mtgcards.mtg.presentation.searchScreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
