@@ -11,12 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mtgcards.R
 import com.example.mtgcards.ui.theme.MTGCardsTheme
+import com.example.ui.theme.exo2
 
 @Composable
 fun WelcomeText(modifier: Modifier = Modifier) {
@@ -34,8 +36,9 @@ fun WelcomeText(modifier: Modifier = Modifier) {
         Text(
             text = stringResource(R.string.welcome_in_mtgcards),
             textAlign = TextAlign.Center,
-            fontSize = 50.sp,
-            lineHeight = 55.sp
+            fontSize = 40.sp,
+            lineHeight = 45.sp,
+            fontFamily = exo2
         )
     }
 }
