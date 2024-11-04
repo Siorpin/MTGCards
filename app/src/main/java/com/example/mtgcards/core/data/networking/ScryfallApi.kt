@@ -4,6 +4,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ScryfallApi {
-    @GET("cards/named")
-    suspend fun getCardByName(@Query("fuzzy") name: String): ScryfallCardResponse
+    @GET("cards/search")
+    suspend fun getCardByName(@Query("q") name: String): ScryfallCardResponse
 }
