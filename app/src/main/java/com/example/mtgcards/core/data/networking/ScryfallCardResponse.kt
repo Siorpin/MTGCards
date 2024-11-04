@@ -1,7 +1,6 @@
 package com.example.mtgcards.core.data.networking
 
 import com.google.gson.annotations.SerializedName
-import java.util.Objects
 
 data class ScryfallCardResponse(
     @SerializedName("data") val data: List<CardResponseObject>,

@@ -1,18 +1,14 @@
 package com.example.mtgcards.mtg.presentation.searchScreen.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,11 +22,14 @@ fun SingleCard(
     card: CardUi,
     modifier: Modifier = Modifier
 ) {
+    val shortenedName = if (card.name.length > 20) "${card.name.take(20)}..."
+                        else card.name
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
+            .clickable {  }
     ) {
         AsyncImage(
             model = card.image,
@@ -39,7 +38,7 @@ fun SingleCard(
                 .height(130.dp)
         )
         Text(
-            text = card.name,
+            text = shortenedName,
             fontSize = 10.sp,
             textAlign = TextAlign.Center
         )

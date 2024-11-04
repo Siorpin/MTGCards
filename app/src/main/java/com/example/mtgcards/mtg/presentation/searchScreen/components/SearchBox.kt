@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.example.mtgcards.ui.theme.MTGCardsTheme
-import org.w3c.dom.Text
 
 @Composable
 fun SearchBox(

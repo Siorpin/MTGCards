@@ -2,17 +2,14 @@ package com.example.mtgcards.mtg.presentation.searchScreen
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.example.mtgcards.core.data.networking.BuildCardObject
 import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
 
 class SearchScreenViewModel: ViewModel() {
     private val _state = MutableStateFlow(SearchScreenState())
@@ -31,7 +28,7 @@ class SearchScreenViewModel: ViewModel() {
             try {
                 val response = BuildCardObject.scryfallApi.getCardByName(searchedString)
 
-                val newCards = response.data.mapNotNull { card ->
+                val newCards = response.data.map { card ->
                     val imageUrl = card.imageUri?.image
                     if (imageUrl != null) {
                         CardUi(
