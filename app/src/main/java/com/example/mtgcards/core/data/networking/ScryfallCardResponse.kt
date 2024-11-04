@@ -14,5 +14,5 @@ data class CardResponseObject(
 )
 
 data class ImageUris(
-    @SerializedName("border_crop") val image: String
+    @SerializedName("border_crop") val image: String?
 )

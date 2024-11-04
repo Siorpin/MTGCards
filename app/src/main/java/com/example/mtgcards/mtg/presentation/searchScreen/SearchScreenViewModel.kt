@@ -30,29 +30,27 @@ class SearchScreenViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 val response = BuildCardObject.scryfallApi.getCardByName(searchedString)
-                var newCards = mutableListOf<CardUi>()
-                if (response.totalCards <= 30) {
-                    newCards = response.data.map{ card ->
+
+                val newCards = response.data.mapNotNull { card ->
+                    val imageUrl = card.imageUri?.image
+                    if (imageUrl != null) {
                         CardUi(
                             name = card.name,
-                            image = card.imageUri.image
+                            image = imageUrl
                         )
-                    }.toMutableList()
-                }
-                else {
-                    for(i in 0..30) {
-                        newCards.add(
-                            CardUi(
-                                response.data[i].name,
-                                response.data[i].imageUri.image
-                            )
+                    } else {
+                        CardUi(
+                            name = card.name,
+                            image = "https://i.imgur.com/LdOBU1I.jpg"
                         )
                     }
-                }
+                }.toMutableList()
 
                 _state.update {
                     it.copy(searchedCards = newCards)
                 }
+
+                Log.d("",newCards.toString())
             } catch (e: Exception) {
                 clearCardList()
                 e.printStackTrace()

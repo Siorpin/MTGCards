@@ -9,7 +9,7 @@ import coil.compose.rememberImagePainter
 
 data class CardUi(
     val name: String,
-    val image: String // TODO: not sure yet
+    val image: String?
 )
 
 fun Card.toUi(): CardUi {
