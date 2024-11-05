@@ -26,7 +26,7 @@ class SearchScreenViewModel: ViewModel() {
     fun searchCards(searchedString: String) {
         viewModelScope.launch {
             try {
-                val response = BuildCardObject.scryfallApi.getCardByName(searchedString)
+                val response = BuildCardObject.scryfallApi.searchCards(searchedString)
 
                 val newCards = response.data.map { card ->
                     val imageUrl = card.imageUri?.image

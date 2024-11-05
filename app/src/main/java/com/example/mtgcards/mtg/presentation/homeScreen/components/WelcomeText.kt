@@ -27,12 +27,6 @@ fun WelcomeText(modifier: Modifier = Modifier) {
         modifier = modifier
             .padding(top = 100.dp)
     ) {
-        Image(
-            painter = painterResource(R.drawable.mtgcardslogo),
-            contentDescription = null,
-            modifier = Modifier
-                .size(120.dp)
-        )
         Text(
             text = stringResource(R.string.welcome_in_mtgcards),
             textAlign = TextAlign.Center,

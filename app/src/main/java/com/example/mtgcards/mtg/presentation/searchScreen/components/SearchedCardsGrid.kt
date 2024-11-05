@@ -9,11 +9,13 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
 
 @Composable
 fun SearchedCardsGrid(
     itemsList: List<CardUi>,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -26,7 +28,10 @@ fun SearchedCardsGrid(
             .padding(bottom = 90.dp)
     ) {
         items(itemsList) { card ->
-            SingleCard(card)
+            SingleCard(
+                card,
+                navController
+            )
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mtgcards.mtg.presentation.cardScreen.CardScreen
 import com.example.mtgcards.mtg.presentation.collectionScreen.CollectionScreen
 import com.example.mtgcards.mtg.presentation.decksScreen.DecksScreen
 import com.example.mtgcards.mtg.presentation.homeScreen.HomeScreen
@@ -34,7 +35,7 @@ fun MTGNavigationController(
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None }
         ) {
-            SearchScreen()
+            SearchScreen(navController = navController)
         }
         composable(
             route = Screen.Collection.route,
@@ -49,6 +50,16 @@ fun MTGNavigationController(
             exitTransition = { ExitTransition.None }
         ) {
             DecksScreen()
+        }
+        composable(
+            route = "${Screen.CardScreen.route}/{name}",
+            enterTransition = { EnterTransition.None },
+            exitTransition = { ExitTransition.None }
+        ) { navBackStackEntry ->
+            val cardName = navBackStackEntry.arguments?.getString("name")
+            cardName?.let { name ->
+                CardScreen(cardName = name)
+            }
         }
     }
 }

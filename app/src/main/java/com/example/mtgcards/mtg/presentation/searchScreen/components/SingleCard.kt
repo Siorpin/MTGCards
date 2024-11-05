@@ -13,13 +13,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.mtgcards.core.navigation.Screen
 import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
 import com.example.mtgcards.ui.theme.MTGCardsTheme
 
 @Composable
 fun SingleCard(
     card: CardUi,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val shortenedName = if (card.name.length > 20) "${card.name.take(20)}..."
@@ -29,7 +32,7 @@ fun SingleCard(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
-            .clickable {  }
+            .clickable { navController.navigate("${Screen.CardScreen.route}/${card.name}") }
     ) {
         AsyncImage(
             model = card.image,
@@ -41,16 +44,6 @@ fun SingleCard(
             text = shortenedName,
             fontSize = 10.sp,
             textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Preview
-@Composable
-fun SingleCardPreview(modifier: Modifier = Modifier) {
-    MTGCardsTheme {
-        SingleCard(
-            CardUi("sds", "https://cards.scryfall.io/normal/front/b/d/bd8fa327-dd41-4737-8f19-2cf5eb1f7cdd.jpg?1614638838"),
         )
     }
 }

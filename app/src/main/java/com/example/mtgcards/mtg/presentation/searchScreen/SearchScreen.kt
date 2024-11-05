@@ -15,12 +15,17 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.mtgcards.mtg.presentation.searchScreen.components.SearchBox
 import com.example.mtgcards.mtg.presentation.searchScreen.components.SearchedCardsGrid
 import com.example.mtgcards.ui.theme.MTGCardsTheme
 
 @Composable
-fun SearchScreen(modifier: Modifier = Modifier) {
+fun SearchScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     val viewModel: SearchScreenViewModel = viewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -40,15 +45,21 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             else viewModel.searchCards(it)
         }
         Spacer(modifier = Modifier.height(14.dp))
-        SearchedCardsGrid(state.searchedCards)
+        SearchedCardsGrid(
+            state.searchedCards,
+            navController
+        )
     }
 }
 
 @PreviewLightDark
 @Composable
-fun SearchScreenPreview(modifier: Modifier = Modifier) {
+fun SearchScreenPreview(
+    modifier: Modifier = Modifier
+) {
     MTGCardsTheme {
         SearchScreen(
+            navController = rememberNavController(),
             modifier = Modifier.background(Color.Blue)
         )
     }
