@@ -1,8 +1,11 @@
 package com.example.mtgcards.mtg.presentation.searchScreen
 
 import android.util.Log
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mtgcards.R
 import com.example.mtgcards.core.data.networking.BuildApiResponse
 import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,23 +27,17 @@ class SearchScreenViewModel: ViewModel() {
     }
 
     fun searchCards(searchedString: String) {
+        _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             try {
                 val response = BuildApiResponse.scryfallApi.searchCards(searchedString)
 
                 val newCards = response.data.map { card ->
                     val imageUrl = card.imageUri?.image
-                    if (imageUrl != null) {
-                        CardUi(
-                            name = card.name,
-                            image = imageUrl
-                        )
-                    } else {
-                        CardUi(
-                            name = card.name,
-                            image = "https://i.imgur.com/LdOBU1I.jpg"
-                        )
-                    }
+                    CardUi(
+                        name = card.name,
+                        image = imageUrl
+                    )
                 }.toMutableList()
 
                 _state.update {
@@ -52,6 +49,7 @@ class SearchScreenViewModel: ViewModel() {
                 clearCardList()
                 e.printStackTrace()
             }
+            _state.update { it.copy(isLoading = false) }
         }
     }
 

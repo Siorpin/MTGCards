@@ -1,11 +1,14 @@
 package com.example.mtgcards.mtg.presentation.searchScreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,6 +34,7 @@ fun SearchScreen(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
@@ -45,10 +49,19 @@ fun SearchScreen(
             else viewModel.searchCards(it)
         }
         Spacer(modifier = Modifier.height(14.dp))
-        SearchedCardsGrid(
-            state.searchedCards,
-            navController
-        )
+        if(state.isLoading) {
+            Box (
+                contentAlignment = Alignment.Center,
+                modifier = modifier.fillMaxSize()
+            ) {
+                CircularProgressIndicator()
+            }
+        } else {
+            SearchedCardsGrid(
+                state.searchedCards,
+                navController
+            )
+        }
     }
 }
 
