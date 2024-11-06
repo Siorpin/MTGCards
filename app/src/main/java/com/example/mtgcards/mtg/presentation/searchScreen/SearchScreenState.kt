@@ -1,5 +1,6 @@
 package com.example.mtgcards.mtg.presentation.searchScreen
 
+import com.example.mtgcards.mtg.domain.Card
 import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
 
 data class SearchScreenState(

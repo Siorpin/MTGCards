@@ -7,10 +7,3 @@ data class CardUi(
     val name: String,
     val image: String?
 )
-
-fun Card.toUi(): CardUi {
-    return CardUi(
-        name = name,
-        image = image
-    )
-}

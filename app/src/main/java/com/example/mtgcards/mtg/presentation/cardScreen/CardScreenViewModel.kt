@@ -39,7 +39,6 @@ class CardScreenViewModel(cardName: String): ViewModel() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            Log.d("siema", state.value.card.toString())
         }
     }
 }

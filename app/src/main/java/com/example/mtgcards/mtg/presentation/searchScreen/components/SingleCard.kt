@@ -55,6 +55,7 @@ fun SingleCard(
         Text(
             text = shortenedName,
             fontSize = 10.sp,
+            lineHeight = 16.sp,
             textAlign = TextAlign.Center
         )
     }

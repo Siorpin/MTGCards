@@ -35,7 +35,7 @@ fun MTGNavigationController(
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None }
         ) {
-            SearchScreen(navController = navController)
+            SearchScreen(navController)
         }
         composable(
             route = Screen.Collection.route,
