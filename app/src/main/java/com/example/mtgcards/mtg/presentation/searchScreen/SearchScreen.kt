@@ -20,7 +20,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.mtgcards.core.navigation.Screen
 import com.example.mtgcards.mtg.presentation.searchScreen.components.SearchBox
 import com.example.mtgcards.mtg.presentation.searchScreen.components.SearchedCardsGrid
 import com.example.mtgcards.ui.theme.MTGCardsTheme

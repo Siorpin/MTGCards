@@ -1,11 +1,8 @@
 package com.example.mtgcards.mtg.presentation.searchScreen
 
 import android.util.Log
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mtgcards.R
 import com.example.mtgcards.core.data.networking.BuildApiResponse
 import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
 import kotlinx.coroutines.flow.MutableStateFlow

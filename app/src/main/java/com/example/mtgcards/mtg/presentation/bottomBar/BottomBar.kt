@@ -14,6 +14,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -26,24 +28,30 @@ fun BottomBar(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
+    // TODO: ogarnac znikanie bottombaru
+    val viewModel: BottomBarViewModel = viewModel()
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     val currentDestination by navController.currentBackStackEntryAsState()
     val currentRoute = currentDestination?.destination?.route
 
     val buttonList = buttonList(navController, currentRoute)
-    BottomAppBar(
-        containerColor = MaterialTheme.colorScheme.secondaryContainer
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            modifier = modifier
-                .fillMaxWidth()
+    if (state.isEnabled) {
+        BottomAppBar(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
         ) {
-            buttonList.forEach{ button ->
-                BottomBarButton(
-                    bottomBarUi = button,
-                    modifier = Modifier.weight(1f)
-                )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = modifier
+                    .fillMaxWidth()
+            ) {
+                buttonList.forEach { button ->
+                    BottomBarButton(
+                        bottomBarUi = button,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
         }
     }
@@ -54,7 +62,9 @@ fun BottomBar(
 fun BottomAppBarPreview(modifier: Modifier = Modifier) {
     MTGCardsTheme {
         Scaffold(bottomBar = {BottomBar(navController = rememberNavController())}) { pd ->
-            Surface(modifier = Modifier.padding(pd).fillMaxSize()) {  }
+            Surface(modifier = Modifier
+                .padding(pd)
+                .fillMaxSize()) {  }
         }
     }
 }

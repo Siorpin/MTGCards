@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -21,7 +20,6 @@ import coil.compose.AsyncImage
 import com.example.mtgcards.R
 import com.example.mtgcards.core.navigation.Screen
 import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
-import com.example.mtgcards.ui.theme.MTGCardsTheme
 
 @Composable
 fun SingleCard(
