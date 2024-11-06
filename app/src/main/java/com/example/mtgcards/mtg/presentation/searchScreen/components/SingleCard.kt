@@ -1,5 +1,6 @@
 package com.example.mtgcards.mtg.presentation.searchScreen.components
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -35,7 +36,7 @@ fun SingleCard(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
-            .clickable { navController.navigate("${Screen.CardScreen.route}/${card.name}") }
+            .clickable { navController.navigate("${Screen.CardScreen.route}/{${Uri.encode(card.name)}}") }
     ) {
         if (card.image == null) {
             Image(

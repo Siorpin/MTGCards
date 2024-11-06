@@ -1,13 +1,14 @@
 package com.example.mtgcards.mtg.presentation.cardScreen
 
-import com.example.mtgcards.mtg.domain.Card
+import com.example.mtgcards.mtg.presentation.cardScreen.models.SingleCardUI
 
 data class CardScreenState(
-    val card: Card = Card(
+    val isLoading: Boolean = false,
+    val card: SingleCardUI = SingleCardUI(
         name = "",
-        image = "",
-        set = "",
-        manaCost = "",
+        image = mapOf(),
+        setName = "",
+        manaCost = listOf(),
         oracleText = ""
     )
 )

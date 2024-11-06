@@ -1,7 +1,11 @@
 package com.example.mtgcards.core.navigation
 
+import android.net.Uri
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -53,12 +57,19 @@ fun MTGNavigationController(
         }
         composable(
             route = "${Screen.CardScreen.route}/{name}",
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None }
+            enterTransition = { fadeIn(
+                animationSpec = tween(500)
+            ) },
+            exitTransition = { fadeOut(
+                animationSpec = tween(700)
+            ) }
         ) { navBackStackEntry ->
-            val cardName = navBackStackEntry.arguments?.getString("name")
+            val cardName = Uri.decode(navBackStackEntry.arguments?.getString("name"))
             cardName?.let { name ->
-                CardScreen(cardName = name)
+                CardScreen(
+                    cardName = name,
+                    onBackClick = { navController.popBackStack() }
+                )
             }
         }
     }

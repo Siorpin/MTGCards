@@ -2,16 +2,16 @@ package com.example.mtgcards.mtg.presentation.cardScreen.models
 
 import com.example.mtgcards.mtg.domain.Card
 
-data class CardUI (
+data class SingleCardUI (
     val name: String,
     val manaCost: List<Char>,
     val oracleText: String,
     val setName: String,
-    val image: String?
+    val image: Map<String, String?>
 )
 
-fun Card.toCardUi(): CardUI {
-    return CardUI(
+fun Card.toCardUi(): SingleCardUI {
+    return SingleCardUI(
         name = name,
         manaCost = manaToList(manaCost),
         image = image,
