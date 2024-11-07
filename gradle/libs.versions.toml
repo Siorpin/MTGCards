@@ -15,7 +15,7 @@ navigationRuntimeKtx = "2.8.3"
 navigationCompose = "2.8.3"
 retrofit = "2.9.0"
 coil = "2.0.0"
-compose = "1.5.1"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +40,9 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofitGson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
+room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room"}
+room-compiler = {group = "androidx.room", name = "room-compiler", version.ref = "room"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
