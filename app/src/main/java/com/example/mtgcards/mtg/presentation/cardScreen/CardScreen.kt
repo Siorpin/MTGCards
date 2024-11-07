@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.mtgcards.R
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenHeader
+import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenImage
 
 @Composable
 fun CardScreen(
@@ -60,25 +61,10 @@ fun CardScreen(
                 onBackClick = onBackClick,
                 cardName = state.card.name
             )
-            if (state.card.image["art_crop"] != null) {
-                AsyncImage(
-                    model = state.card.image["art_crop"],
-                    contentDescription = state.card.name,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(170.dp)
-                )
-            } else {
-                Image(
-                    painter = painterResource(R.drawable.cardback),
-                    contentDescription = state.card.name,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(170.dp)
-                )
-            }
+            CardScreenImage(
+                cardName = state.card.name,
+                imageUri = state.card.image["art_crop"]
+            )
         }
 
     }

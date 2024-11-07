@@ -25,7 +25,8 @@ fun MTGNavigationController(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Screen.Home.route,
+        modifier = modifier
     ) {
         composable(
             route = Screen.Home.route,
@@ -60,9 +61,7 @@ fun MTGNavigationController(
             enterTransition = { fadeIn(
                 animationSpec = tween(500)
             ) },
-            exitTransition = { fadeOut(
-                animationSpec = tween(700)
-            ) }
+            exitTransition = { ExitTransition.None }
         ) { navBackStackEntry ->
             val cardName = Uri.decode(navBackStackEntry.arguments?.getString("name"))
             cardName?.let { name ->
