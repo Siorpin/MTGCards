@@ -3,4 +3,5 @@
     <string name="new_features"><![CDATA[It\'s 1.0.0 version! In this box you will get updates about all exciting changes in my app! Thanks for using it <3]]></string>
     <string name="welcome_in_mtgcards">Welcome in MTGCards!</string>
     <string name="what_s_new">What\'s new?</string>
+    <string name="decks_header_string">Decks</string>
 </resources>

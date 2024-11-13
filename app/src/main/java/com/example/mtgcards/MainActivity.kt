@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.example.mtgcards.core.data.database.AppDatabase
 import com.example.mtgcards.core.navigation.MTGNavigationController
 import com.example.mtgcards.mtg.presentation.bottomBar.BottomBar
 import com.example.mtgcards.ui.theme.MTGCardsTheme
@@ -17,6 +18,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val database = AppDatabase.getInstance(this)
+
         setContent {
             MTGCardsTheme(
                 dynamicColor = false
@@ -29,6 +33,7 @@ class MainActivity : ComponentActivity() {
 
                     MTGNavigationController(
                         navController = navController,
+                        database = database,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

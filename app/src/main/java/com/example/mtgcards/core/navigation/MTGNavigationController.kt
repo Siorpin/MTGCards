@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mtgcards.core.data.database.AppDatabase
 import com.example.mtgcards.mtg.presentation.cardScreen.CardScreen
 import com.example.mtgcards.mtg.presentation.collectionScreen.CollectionScreen
 import com.example.mtgcards.mtg.presentation.decksScreen.DecksScreen
@@ -21,6 +22,7 @@ import com.example.mtgcards.mtg.presentation.searchScreen.SearchScreen
 @Composable
 fun MTGNavigationController(
     modifier: Modifier = Modifier,
+    database: AppDatabase,
     navController: NavHostController = rememberNavController()
 ) {
     NavHost(
@@ -47,7 +49,9 @@ fun MTGNavigationController(
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None }
         ) {
-            CollectionScreen()
+            CollectionScreen(
+                database = database
+            )
         }
         composable(
             route = Screen.Decks.route,
