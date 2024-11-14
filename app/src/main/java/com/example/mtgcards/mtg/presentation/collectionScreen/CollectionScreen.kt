@@ -17,6 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mtgcards.MainActivity
 import com.example.mtgcards.core.data.database.AppDatabase
 import com.example.mtgcards.core.data.database.dao.CollectionDao
+import com.example.mtgcards.mtg.presentation.collectionScreen.components.CollectionScreenHeader
 
 @Composable
 fun CollectionScreen(
@@ -34,19 +35,6 @@ fun CollectionScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button(
-            onClick = {
-                viewModel.loadCollection()
-            }
-        ) {
-            Text("Click")
-        }
-        Button(
-            onClick = {
-                viewModel.insetCard()
-            }
-        ) {
-            Text("Add")
-        }
+        CollectionScreenHeader()
     }
 }

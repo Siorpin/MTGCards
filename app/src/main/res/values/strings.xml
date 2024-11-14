@@ -4,4 +4,5 @@
     <string name="welcome_in_mtgcards">Welcome in MTGCards!</string>
     <string name="what_s_new">What\'s new?</string>
     <string name="decks_header_string">Decks</string>
+    <string name="collection">Collection</string>
 </resources>

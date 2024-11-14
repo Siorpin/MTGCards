@@ -6,10 +6,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mtgcards.core.data.database.dao.CollectionDao
+import com.example.mtgcards.core.data.networking.BuildApiResponse
+import com.example.mtgcards.core.data.networking.ScryfallApi
 import com.example.mtgcards.core.domain.CardsCollection
+import com.example.mtgcards.mtg.data.mappers.toMap
+import com.example.mtgcards.mtg.domain.Card
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CollectionScreenViewModel(private val repository: CollectionDao): ViewModel() {
@@ -30,9 +35,21 @@ class CollectionScreenViewModel(private val repository: CollectionDao): ViewMode
     }
 
     fun loadCollection() {
+        _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            val x = repository.getCollection()
-            Log.d("x: ", x.toString())
+            val collection = repository.getCollection()
+            val cardList: MutableList<Card> = mutableListOf()
+            collection.forEach{ el ->
+                val response = BuildApiResponse.scryfallApi.getSingleCard(el.cardName)
+                cardList.add(Card(
+                    name = response.name,
+                    image = response.imageUris.toMap(),
+                    set = response.setName,
+                    manaCost = response.manaCost,
+                    oracleText = response.oracleText
+                ))
+            }
+            _state.update { it.copy(isLoading = false, cards = cardList) }
         }
     }
 }

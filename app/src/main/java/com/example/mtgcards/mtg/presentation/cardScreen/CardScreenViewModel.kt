@@ -3,6 +3,7 @@ package com.example.mtgcards.mtg.presentation.cardScreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mtgcards.core.data.networking.BuildApiResponse
+import com.example.mtgcards.mtg.data.mappers.toMap
 import com.example.mtgcards.mtg.domain.Card
 import com.example.mtgcards.mtg.presentation.cardScreen.models.toCardUi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,10 +31,7 @@ class CardScreenViewModel(cardName: String): ViewModel() {
                 val response = BuildApiResponse.scryfallApi.getSingleCard(cardName)
                 _state.update { it.copy(card = Card(
                     name = response.name,
-                    image = mapOf(
-                        "art_crop" to response.imageUris.artCrop,
-                        "image" to response.imageUris.image
-                    ),
+                    image = response.imageUris.toMap(),
                     manaCost = response.manaCost,
                     oracleText = response.oracleText,
                     set = response.setName
