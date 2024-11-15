@@ -9,6 +9,7 @@ import com.example.mtgcards.core.data.database.dao.CollectionDao
 import com.example.mtgcards.core.data.networking.BuildApiResponse
 import com.example.mtgcards.core.data.networking.ScryfallApi
 import com.example.mtgcards.core.domain.CardsCollection
+import com.example.mtgcards.mtg.data.mappers.toCard
 import com.example.mtgcards.mtg.data.mappers.toMap
 import com.example.mtgcards.mtg.domain.Card
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,13 +42,7 @@ class CollectionScreenViewModel(private val repository: CollectionDao): ViewMode
             val cardList: MutableList<Card> = mutableListOf()
             collection.forEach{ el ->
                 val response = BuildApiResponse.scryfallApi.getSingleCard(el.cardName)
-                cardList.add(Card(
-                    name = response.name,
-                    image = response.imageUris.toMap(),
-                    set = response.setName,
-                    manaCost = response.manaCost,
-                    oracleText = response.oracleText
-                ))
+                cardList.add(response.toCard())
             }
             _state.update { it.copy(isLoading = false, cards = cardList) }
         }

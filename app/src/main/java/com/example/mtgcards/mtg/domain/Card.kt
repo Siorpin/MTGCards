@@ -5,5 +5,6 @@ data class Card (
     val image: Map<String, String?>,
     val manaCost: String,
     val oracleText: String,
-    val set: String
+    val set: String,
+    val colorIdentity: List<String>
 )

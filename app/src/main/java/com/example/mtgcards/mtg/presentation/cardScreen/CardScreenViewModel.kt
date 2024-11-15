@@ -1,8 +1,10 @@
 package com.example.mtgcards.mtg.presentation.cardScreen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mtgcards.core.data.networking.BuildApiResponse
+import com.example.mtgcards.mtg.data.mappers.toCard
 import com.example.mtgcards.mtg.data.mappers.toMap
 import com.example.mtgcards.mtg.domain.Card
 import com.example.mtgcards.mtg.presentation.cardScreen.models.toCardUi
@@ -29,14 +31,8 @@ class CardScreenViewModel(cardName: String): ViewModel() {
         viewModelScope.launch {
             try {
                 val response = BuildApiResponse.scryfallApi.getSingleCard(cardName)
-                _state.update { it.copy(card = Card(
-                    name = response.name,
-                    image = response.imageUris.toMap(),
-                    manaCost = response.manaCost,
-                    oracleText = response.oracleText,
-                    set = response.setName
-                ).toCardUi())
-                }
+                Log.d("", response.colorIdentity.toString())
+                _state.update { it.copy(card = response.toCard().toCardUi()) }
             } catch (e: Exception) {
                 e.printStackTrace()
             }

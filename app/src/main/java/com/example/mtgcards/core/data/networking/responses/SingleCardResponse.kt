@@ -8,5 +8,6 @@ data class SingleCardResponse (
     @SerializedName("mana_cost") val manaCost: String,
     @SerializedName("oracle_text") val oracleText: String,
     @SerializedName("set_name") val setName: String,
-    @SerializedName("image_uris") val imageUris: ImageUris
+    @SerializedName("image_uris") val imageUris: ImageUris,
+    @SerializedName("color_identity") val colorIdentity: List<String>
 )
