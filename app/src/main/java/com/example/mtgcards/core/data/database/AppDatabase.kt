@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.mtgcards.core.data.database.dao.CollectionDao
 import com.example.mtgcards.core.data.database.dao.DecksDao
-import com.example.mtgcards.core.domain.Decks
 import com.example.mtgcards.core.domain.CardsCollection
+import com.example.mtgcards.core.domain.Decks
 
 @Database(entities = [CardsCollection::class, Decks::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {

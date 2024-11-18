@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mtgcards.core.data.networking.BuildApiResponse
 import com.example.mtgcards.mtg.data.mappers.toCard
-import com.example.mtgcards.mtg.data.mappers.toMap
-import com.example.mtgcards.mtg.domain.Card
 import com.example.mtgcards.mtg.presentation.cardScreen.models.toCardUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
