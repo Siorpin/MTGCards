@@ -26,20 +26,25 @@ class CollectionScreenViewModel(private val repository: CollectionDao): ViewMode
         initialValue = CollectionScreenState()
     )
 
+    init {
+        loadCollection()
+    }
+
     fun insetCard() {
         viewModelScope.launch {
             repository.insertCardToCollection(CardsCollection(
-                cardName = "blublu",
+                cardName = "yorvo, Lord of Garenbrig",
                 count = 4
             ))
         }
     }
 
-    fun loadCollection() {
+    private fun loadCollection() {
         _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             val collection = repository.getCollection()
             val cardList: MutableList<Card> = mutableListOf()
+
             collection.forEach{ el ->
                 val response = BuildApiResponse.scryfallApi.getSingleCard(el.cardName)
                 cardList.add(response.toCard())

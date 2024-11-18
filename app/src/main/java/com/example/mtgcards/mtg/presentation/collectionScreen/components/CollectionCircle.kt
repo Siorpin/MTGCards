@@ -1,5 +1,6 @@
 package com.example.mtgcards.mtg.presentation.collectionScreen.components
 
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -8,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import com.example.mtgcards.mtg.domain.Card
+import com.example.mtgcards.mtg.domain.ColorIdentity
 
 @Composable
 fun CollectionCircle(
@@ -16,6 +18,7 @@ fun CollectionCircle(
     borderWith: Dp,
     modifier: Modifier = Modifier
 ) {
+    val colorPercentage = calculatePercents(cardList)
 
     Canvas(
         modifier = modifier
@@ -24,41 +27,89 @@ fun CollectionCircle(
         val strokeWith = borderWith.toPx()
         var currentAngle = -90f
 
-        for (i in 0..3) {
+        colorPercentage.forEach { item ->
+            val angle = item.value * 360
             drawArc(
-                color = Color(0XFF129381 * i),
+                color = when(item.key) {
+                    ColorIdentity.RED -> Color.Red
+                    ColorIdentity.GREEN -> Color.Green
+                    ColorIdentity.WHITE -> Color.White
+                    ColorIdentity.BLACK -> Color.Black
+                    ColorIdentity.BLUE -> Color.Blue
+                    ColorIdentity.COLORLESS -> Color.Gray
+                    ColorIdentity.MULTICOLORED -> Color.Magenta
+                },
                 startAngle = currentAngle,
-                sweepAngle = 90f,
+                sweepAngle = angle,
                 useCenter = false,
                 style = Stroke(width = strokeWith)
             )
-            currentAngle += 90
+            currentAngle += angle
+            Log.d("", item.value.toString())
         }
 
     }
 }
 
-private fun calculatePercents(cardList: List<Card>): Map<Color, Float> {
-    var colorsMap = mutableMapOf(
-        Color.White to 0f,
-        Color.Red to 0f,
-        Color.Blue to 0f,
-        Color.Green to 0f,
-        Color.Gray to 0f,
-        Color.Gray to 0f,
+private fun calculatePercents(cardList: List<Card>): MutableMap<ColorIdentity, Float> {
+    val colorsMap = mutableMapOf(
+        ColorIdentity.RED to 0f,
+        ColorIdentity.WHITE to 0f,
+        ColorIdentity.BLACK to 0f,
+        ColorIdentity.BLUE to 0f,
+        ColorIdentity.COLORLESS to 0f,
+        ColorIdentity.MULTICOLORED to 0f,
     )
 
-    cardList.forEach {card ->
+    cardList.forEach { card ->
         when(card.colorIdentity.size) {
             0 -> {
-
+                colorsMap.merge(ColorIdentity.COLORLESS, 1f) {old, value ->
+                    old + value
+                }
             }
             1 -> {
-
+                when(card.colorIdentity[0]) {
+                    "W" -> {
+                        colorsMap.merge(ColorIdentity.WHITE, 1f) {old, value ->
+                            old + value
+                        }
+                    }
+                    "B" -> {
+                        colorsMap.merge(ColorIdentity.BLACK, 1f) {old, value ->
+                            old + value
+                        }
+                    }
+                    "R" -> {
+                        colorsMap.merge(ColorIdentity.RED, 1f) {old, value ->
+                            old + value
+                        }
+                    }
+                    "U" -> {
+                        colorsMap.merge(ColorIdentity.BLUE, 1f) {old, value ->
+                            old + value
+                        }
+                    }
+                    "G" -> {
+                        colorsMap.merge(ColorIdentity.GREEN, 1f) {old, value ->
+                            old + value
+                        }
+                    }
+                }
             }
             else -> {
-
+                colorsMap.merge(ColorIdentity.MULTICOLORED, 1f) {old, value ->
+                    old + value
+                }
             }
         }
     }
+
+    colorsMap.keys.forEach{ key ->
+        colorsMap.merge(key, cardList.size.toFloat() ) {old, value ->
+            old / value
+        }
+    }
+
+    return colorsMap
 }

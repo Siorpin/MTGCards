@@ -3,13 +3,17 @@ package com.example.mtgcards.mtg.presentation.collectionScreen
 import android.app.Activity
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -28,19 +32,32 @@ fun CollectionScreen(
     database: AppDatabase,
     modifier: Modifier = Modifier
 ) {
+//    val viewModel = ViewModelProvider(
+//        ViewModelStore(),
+//        CollectionVMFactory(database.collectionDao())
+//    )[CollectionScreenViewModel::class.java]
 
-    val viewModel = ViewModelProvider(
-        ViewModelStore(),
-        CollectionVMFactory(database.collectionDao())
-    )[CollectionScreenViewModel::class.java]
+    val viewModel: CollectionScreenViewModel = remember {
+        CollectionScreenViewModel(repository = database.collectionDao())
+    }
+
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CollectionScreenHeader()
-        Spacer(modifier = Modifier.height(30.dp))
-        CollectionStatus(state.cards)
+    if (state.isLoading) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = modifier.fillMaxSize()
+        ) {
+            CircularProgressIndicator()
+        }
+    } else {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CollectionScreenHeader()
+            Spacer(modifier = Modifier.height(30.dp))
+            CollectionStatus(state.cards)
+        }
     }
 }
