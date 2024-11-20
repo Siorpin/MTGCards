@@ -3,6 +3,7 @@ package com.example.mtgcards.mtg.presentation.collectionScreen.components
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -22,9 +23,9 @@ fun CollectionScreenGrid(
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
-
         columns = GridCells.Fixed(3),
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
     ) {
         item(span = { GridItemSpan(maxCurrentLineSpan) }) {
             CollectionStatus(itemsList)

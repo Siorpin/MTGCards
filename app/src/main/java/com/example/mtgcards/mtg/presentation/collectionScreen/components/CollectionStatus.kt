@@ -18,7 +18,7 @@ fun CollectionStatus(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .size(70.dp)
+            .size(75.dp)
     ) {
         CollectionCircle(
             cardList = cardList,
