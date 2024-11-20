@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.mtgcards.mtg.presentation.shared.models.CardUi
 import com.example.mtgcards.mtg.presentation.shared.components.SingleCard
+import com.example.mtgcards.mtg.presentation.shared.models.CardUi
 
 @Composable
 fun SearchedCardsGrid(

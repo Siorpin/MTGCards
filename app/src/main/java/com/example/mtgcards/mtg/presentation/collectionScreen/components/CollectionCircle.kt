@@ -8,13 +8,13 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import com.example.mtgcards.mtg.domain.Card
 import com.example.mtgcards.mtg.domain.ColorIdentity
-import androidx.compose.runtime.remember as remember
 
 @Composable
 fun CollectionCircle(
@@ -48,9 +48,9 @@ fun CollectionCircle(
                     ColorIdentity.RED -> Color.Red
                     ColorIdentity.GREEN -> Color.Green
                     ColorIdentity.WHITE -> Color.White
-                    ColorIdentity.BLACK -> Color.Black
+                    ColorIdentity.BLACK -> Color.Gray
                     ColorIdentity.BLUE -> Color.Blue
-                    ColorIdentity.COLORLESS -> Color.Gray
+                    ColorIdentity.COLORLESS -> Color.LightGray
                     ColorIdentity.MULTICOLORED -> Color.Magenta
                 },
                 startAngle = currentAngle,
