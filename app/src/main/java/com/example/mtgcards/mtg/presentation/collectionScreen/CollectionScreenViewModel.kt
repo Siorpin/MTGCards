@@ -25,15 +25,6 @@ class CollectionScreenViewModel(private val repository: CollectionDao): ViewMode
         loadCollection()
     }
 
-    fun insetCard() {
-        viewModelScope.launch {
-            repository.insertCardToCollection(CardsCollection(
-                cardName = "yorvo, Lord of Garenbrig",
-                count = 4
-            ))
-        }
-    }
-
     private fun loadCollection() {
         _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {

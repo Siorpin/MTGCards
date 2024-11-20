@@ -1,4 +1,4 @@
-package com.example.mtgcards.mtg.presentation.searchScreen.components
+package com.example.mtgcards.mtg.presentation.collectionScreen.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,12 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.mtgcards.mtg.presentation.shared.models.CardUi
+import com.example.mtgcards.mtg.domain.Card
+import com.example.mtgcards.mtg.data.mappers.toCardUi
 import com.example.mtgcards.mtg.presentation.shared.components.SingleCard
 
 @Composable
-fun SearchedCardsGrid(
-    itemsList: List<CardUi>,
+fun CollectionScreenGrid(
+    itemsList: List<Card>,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -28,7 +29,7 @@ fun SearchedCardsGrid(
     ) {
         items(itemsList) { card ->
             SingleCard(
-                card,
+                card.toCardUi(),
                 navController
             )
         }

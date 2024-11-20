@@ -1,4 +1,4 @@
-package com.example.mtgcards.mtg.presentation.searchScreen.components
+package com.example.mtgcards.mtg.presentation.shared.components
 
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.mtgcards.R
 import com.example.mtgcards.core.navigation.Screen
-import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
+import com.example.mtgcards.mtg.presentation.shared.models.CardUi
 
 @Composable
 fun SingleCard(

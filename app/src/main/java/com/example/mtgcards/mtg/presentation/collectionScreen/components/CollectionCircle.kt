@@ -1,15 +1,20 @@
 package com.example.mtgcards.mtg.presentation.collectionScreen.components
 
 import android.util.Log
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.EaseOut
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import com.example.mtgcards.mtg.domain.Card
 import com.example.mtgcards.mtg.domain.ColorIdentity
+import androidx.compose.runtime.remember as remember
 
 @Composable
 fun CollectionCircle(
@@ -19,6 +24,14 @@ fun CollectionCircle(
     modifier: Modifier = Modifier
 ) {
     val colorPercentage = calculatePercents(cardList)
+    val animateFloat = remember { Animatable(0f) }
+
+    LaunchedEffect(animateFloat) {
+        animateFloat.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 700, easing = EaseOut)
+        )
+    }
 
     Canvas(
         modifier = modifier
@@ -28,7 +41,8 @@ fun CollectionCircle(
         var currentAngle = -90f
 
         colorPercentage.forEach { item ->
-            val angle = item.value * 360
+            val angle = item.value * 360 * animateFloat.value
+
             drawArc(
                 color = when(item.key) {
                     ColorIdentity.RED -> Color.Red

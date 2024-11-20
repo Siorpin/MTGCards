@@ -49,7 +49,8 @@ fun MTGNavigationController(
             exitTransition = { ExitTransition.None }
         ) {
             CollectionScreen(
-                database = database
+                database = database,
+                navController = navController
             )
         }
         composable(
@@ -70,6 +71,7 @@ fun MTGNavigationController(
             cardName?.let { name ->
                 CardScreen(
                     cardName = name,
+                    database = database,
                     onBackClick = { navController.popBackStack() }
                 )
             }

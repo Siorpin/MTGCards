@@ -1,6 +1,6 @@
 package com.example.mtgcards.mtg.presentation.searchScreen
 
-import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
+import com.example.mtgcards.mtg.presentation.shared.models.CardUi
 
 data class SearchScreenState(
     val searchString: String = "",

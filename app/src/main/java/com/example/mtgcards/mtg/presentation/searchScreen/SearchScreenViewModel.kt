@@ -4,7 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mtgcards.core.data.networking.BuildApiResponse
-import com.example.mtgcards.mtg.presentation.searchScreen.models.CardUi
+import com.example.mtgcards.mtg.presentation.shared.models.CardUi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -19,13 +20,17 @@ class SearchScreenViewModel: ViewModel() {
         initialValue = SearchScreenState()
     )
 
+    private var currentJob: Job? = null
+
     fun updateText(newText: String) {
         _state.update { it.copy(searchString = newText) }
     }
 
     fun searchCards(searchedString: String) {
         _state.update { it.copy(isLoading = true) }
-        viewModelScope.launch {
+        currentJob?.cancel()
+
+        currentJob = viewModelScope.launch {
             try {
                 val response = BuildApiResponse.scryfallApi.searchCards(searchedString)
 

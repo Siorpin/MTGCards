@@ -1,4 +1,4 @@
-package com.example.mtgcards.mtg.presentation.searchScreen.models
+package com.example.mtgcards.mtg.presentation.shared.models
 
 data class CardUi(
     val name: String,

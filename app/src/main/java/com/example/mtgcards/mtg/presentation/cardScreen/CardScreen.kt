@@ -17,17 +17,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.mtgcards.core.data.database.AppDatabase
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenHeader
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenImage
 
 @Composable
 fun CardScreen(
     cardName: String,
+    database: AppDatabase,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val viewModel: CardScreenViewModel = remember(cardName){
-        CardScreenViewModel(cardName)
+        CardScreenViewModel(cardName, database.collectionDao())
     }
 
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -52,6 +54,7 @@ fun CardScreen(
         } else {
             CardScreenHeader(
                 onBackClick = onBackClick,
+                onPlusClick = { viewModel.insertCard(cardName) },
                 cardName = state.card.name
             )
             CardScreenImage(
