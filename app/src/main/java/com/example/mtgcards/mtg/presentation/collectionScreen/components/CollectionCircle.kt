@@ -61,7 +61,6 @@ fun CollectionCircle(
                 style = Stroke(width = strokeWith)
             )
             currentAngle += angle
-            Log.d("", item.value.toString())
         }
 
     }

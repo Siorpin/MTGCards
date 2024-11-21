@@ -40,15 +40,13 @@ class CardScreenViewModel(cardName: String, private val repository: CollectionDa
         }
     }
 
-    private fun checkIfCardInCollection(cardName: String): Boolean {
+    private suspend fun checkIfCardInCollection(cardName: String): Boolean {
         var returnedValue = false
 
-        viewModelScope.launch {
-            val cardsList = repository.getCollection()
+        val cardsList = repository.getCollection()
 
-            cardsList.forEach{ item ->
-                if (item.cardName == cardName) returnedValue = true
-            }
+        cardsList.forEach{ item ->
+            if (item.cardName == cardName) returnedValue = true
         }
         return returnedValue
     }

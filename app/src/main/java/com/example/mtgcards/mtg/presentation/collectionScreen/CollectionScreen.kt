@@ -33,7 +33,6 @@ fun CollectionScreen(
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-
     if (state.isLoading) {
         Box(
             contentAlignment = Alignment.Center,

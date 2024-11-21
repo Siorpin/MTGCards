@@ -1,5 +1,6 @@
 package com.example.mtgcards.mtg.presentation.collectionScreen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mtgcards.core.data.database.dao.CollectionDao
@@ -35,6 +36,7 @@ class CollectionScreenViewModel(private val repository: CollectionDao): ViewMode
                 cardList.add(response.toCard())
             }
             _state.update { it.copy(isLoading = false, cards = cardList) }
+            Log.d("count", collection.toString())
         }
     }
 }
