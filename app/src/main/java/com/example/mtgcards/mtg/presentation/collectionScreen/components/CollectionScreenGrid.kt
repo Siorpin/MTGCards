@@ -1,5 +1,6 @@
 package com.example.mtgcards.mtg.presentation.collectionScreen.components
 
+import android.health.connect.datatypes.units.Percentage
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -14,12 +15,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.mtgcards.mtg.data.mappers.toCardUi
 import com.example.mtgcards.mtg.domain.Card
+import com.example.mtgcards.mtg.domain.ColorIdentity
 import com.example.mtgcards.mtg.presentation.shared.components.SingleCard
 
 @Composable
 fun CollectionScreenGrid(
     itemsList: List<Card>,
     navController: NavController,
+    cardsAmount: Int,
+    colorsPercentage: MutableMap<ColorIdentity, Float>,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -28,7 +32,12 @@ fun CollectionScreenGrid(
             .fillMaxSize()
     ) {
         item(span = { GridItemSpan(maxCurrentLineSpan) }) {
-            CollectionStatus(itemsList)
+            CollectionCircle(
+                size = 75.dp,
+                borderWith = 3.dp,
+                colorsPercentage = colorsPercentage,
+                cardsAmount = cardsAmount
+            )
             Spacer(modifier = Modifier.height(100.dp))
         }
 

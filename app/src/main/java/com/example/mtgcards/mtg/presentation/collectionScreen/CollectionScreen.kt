@@ -46,7 +46,9 @@ fun CollectionScreen(
             Spacer(modifier = Modifier.height(30.dp))
             CollectionScreenGrid(
                 navController = navController,
-                itemsList = state.cards
+                itemsList = state.cards,
+                colorsPercentage = state.colorsPercentage,
+                cardsAmount = state.cardsAmount
             )
         }
     }
