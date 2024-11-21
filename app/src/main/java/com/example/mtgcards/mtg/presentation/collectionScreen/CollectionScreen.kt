@@ -11,12 +11,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.example.mtgcards.R
 import com.example.mtgcards.core.data.database.AppDatabase
 import com.example.mtgcards.mtg.presentation.collectionScreen.components.CollectionScreenGrid
-import com.example.mtgcards.mtg.presentation.collectionScreen.components.CollectionScreenHeader
+import com.example.mtgcards.mtg.presentation.shared.components.ScreenHeader
 
 @Composable
 fun CollectionScreen(
@@ -41,7 +43,7 @@ fun CollectionScreen(
         }
     } else {
         Column {
-            CollectionScreenHeader()
+            ScreenHeader(stringResource(R.string.collection))
             Spacer(modifier = Modifier.height(30.dp))
             CollectionScreenGrid(
                 navController = navController,

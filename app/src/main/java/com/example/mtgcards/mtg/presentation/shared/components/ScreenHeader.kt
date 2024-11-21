@@ -1,4 +1,4 @@
-package com.example.mtgcards.mtg.presentation.collectionScreen.components
+package com.example.mtgcards.mtg.presentation.shared.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,7 +18,10 @@ import com.example.mtgcards.R
 import com.example.ui.theme.exo2
 
 @Composable
-fun CollectionScreenHeader(modifier: Modifier = Modifier) {
+fun ScreenHeader(
+    screenName: String,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -28,7 +31,7 @@ fun CollectionScreenHeader(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(R.string.collection),
+            text = screenName,
             fontSize = 26.sp,
             fontFamily = exo2
         )

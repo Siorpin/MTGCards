@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.mtgcards.mtg.presentation.decksScreen.components.DecksScreenHeader
+import androidx.compose.ui.res.stringResource
+import com.example.mtgcards.R
+import com.example.mtgcards.mtg.presentation.shared.components.ScreenHeader
 
 @Composable
 fun DecksScreen(modifier: Modifier = Modifier) {
@@ -13,6 +15,6 @@ fun DecksScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        DecksScreenHeader()
+        ScreenHeader(stringResource(R.string.decks))
     }
 }
