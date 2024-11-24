@@ -10,5 +10,5 @@ interface ScryfallApi {
     suspend fun searchCards(@Query("q") name: String): SearchCardResponse
 
     @GET("cards/named")
-    suspend fun getSingleCard(@Query("fuzzy") name: String): SingleCardResponse
+    suspend fun getSingleCard(@Query("exact") name: String): SingleCardResponse
 }

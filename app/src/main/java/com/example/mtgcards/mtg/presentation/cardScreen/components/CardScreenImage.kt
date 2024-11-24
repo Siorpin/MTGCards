@@ -24,7 +24,6 @@ fun CardScreenImage(
 ) {
     Box(
         modifier = modifier
-            .padding(6.dp)
             .height(170.dp)
             .clip(RoundedCornerShape(16.dp))
             .fillMaxWidth()
