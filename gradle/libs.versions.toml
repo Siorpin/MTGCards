@@ -43,6 +43,7 @@ coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
 room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room"}
 room-compiler = {group = "androidx.room", name = "room-compiler", version.ref = "room"}
+okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version = "5.0.0-alpha.11" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

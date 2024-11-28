@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.net.URLEncoder
 
 class CardScreenViewModel(cardName: String, private val repository: CollectionDao): ViewModel() {
     private val _state = MutableStateFlow(CardScreenState())
@@ -57,12 +56,15 @@ class CardScreenViewModel(cardName: String, private val repository: CollectionDa
         _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             try {
-                val response = BuildApiResponse.scryfallApi.getSingleCard(cardName)
+                val response = BuildApiResponse.scryfallApi.getSingleCard(cardName).checkIfHasFaces() // <---- error
 
-                _state.update { it.copy(card = response.toCard().toCardUi()) }
+                Log.d("resp", response.toString())
+
+                _state.update {
+                    it.copy(card = response[0].toCard().toCardUi())
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
-                Log.d("error", e.toString())
             }
             _state.update { it.copy(isLoading = false) }
         }

@@ -34,12 +34,15 @@ class SearchScreenViewModel: ViewModel() {
             try {
                 val response = BuildApiResponse.scryfallApi.searchCards(searchedString)
 
-                val newCards = response.data.map { card ->
+                val newCards = response.data.map { item ->
+                    val card = item.checkIfSearchHasFaces()
                     val imageUrl = card.imageUri?.image
-                    CardUi(
-                        name = card.name,
-                        image = imageUrl
-                    )
+                    card.name?.let {
+                        CardUi(
+                            name = it,
+                            image = imageUrl
+                        )
+                    }
                 }.toMutableList()
 
                 _state.update {

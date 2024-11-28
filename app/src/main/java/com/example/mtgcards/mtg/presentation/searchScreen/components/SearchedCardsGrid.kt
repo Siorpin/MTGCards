@@ -14,7 +14,7 @@ import com.example.mtgcards.mtg.presentation.shared.models.CardUi
 
 @Composable
 fun SearchedCardsGrid(
-    itemsList: List<CardUi>,
+    itemsList: MutableList<CardUi?>,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -27,10 +27,12 @@ fun SearchedCardsGrid(
             .fillMaxSize()
     ) {
         items(itemsList) { card ->
-            SingleCard(
-                card,
-                navController
-            )
+            if (card != null) {
+                SingleCard(
+                    card,
+                    navController
+                )
+            }
         }
     }
 }
