@@ -56,13 +56,20 @@ class CardScreenViewModel(cardName: String, private val repository: CollectionDa
         _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             try {
-                val response = BuildApiResponse.scryfallApi.getSingleCard(cardName).checkIfHasFaces() // <---- error
-
-                Log.d("resp", response.toString())
+                val response = BuildApiResponse.scryfallApi.getSingleCard(cardName).checkIfHasFaces()
 
                 _state.update {
-                    it.copy(card = response[0].toCard().toCardUi())
+                    it.copy(
+                        cards = response.map { item ->
+                            item.toCard().toCardUi()
+                        },
+                        multiFaces = when(response.size) {
+                            1 -> false
+                            else -> true
+                        }
+                    )
                 }
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

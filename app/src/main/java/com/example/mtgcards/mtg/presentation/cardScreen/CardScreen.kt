@@ -1,5 +1,6 @@
 package com.example.mtgcards.mtg.presentation.cardScreen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,6 +24,7 @@ import com.example.mtgcards.core.data.database.AppDatabase
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardInfoPanel
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenHeader
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenImage
+import com.example.mtgcards.mtg.presentation.cardScreen.components.SingleFacedCard
 
 @Composable
 fun CardScreen(
@@ -56,21 +58,15 @@ fun CardScreen(
                 CircularProgressIndicator()
             }
         } else {
-            CardScreenHeader(
-                onBackClick = onBackClick,
-                onPlusClick = { viewModel.insertCard(cardName) },
-                cardName = state.card.name
-            )
-            Spacer(modifier = Modifier.height(6.dp))
-            CardScreenImage(
-                cardName = state.card.name,
-                imageUri = state.card.image["art_crop"]
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            CardInfoPanel(
-                cardName = state.card.name,
-                oracleText = state.card.oracleText
-            )
+            if (state.multiFaces) Log.d("toto", "")
+            else {
+                Log.d("state", state.cards.toString())
+                SingleFacedCard(
+                    onBackClick = onBackClick,
+                    onPlusClick = { viewModel.insertCard(cardName) },
+                    card = state.cards.first()
+                )
+            }
         }
 
     }
