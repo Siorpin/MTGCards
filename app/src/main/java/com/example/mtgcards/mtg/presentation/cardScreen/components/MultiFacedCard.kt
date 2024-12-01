@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,17 +34,17 @@ fun MultiFacedCard(
             state = rememberPagerState { faces.size },
             key = { faces[it].name },
             verticalAlignment = Alignment.Top,
+            pageSpacing = 12.dp,
             modifier = Modifier.fillMaxSize()
         ) { index ->
             val card = faces[index]
-            Column(
-
-            ) {
+            Column {
                 CardScreenImage(
                     cardName = card.name,
                     imageUri = card.image["art_crop"]
                 )
                 Spacer(modifier = Modifier.height(15.dp))
+                ManaCost(card.manaCost)
                 CardInfoPanel(
                     cardName = card.name,
                     oracleText = card.oracleText

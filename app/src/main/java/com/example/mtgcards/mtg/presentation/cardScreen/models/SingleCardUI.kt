@@ -4,7 +4,7 @@ import com.example.mtgcards.mtg.domain.Card
 
 data class SingleCardUI (
     val name: String,
-    val manaCost: List<Char>,
+    val manaCost: List<String>,
     val oracleText: String,
     val setName: String,
     val image: Map<String, String?>
@@ -20,10 +20,17 @@ fun Card.toCardUi(): SingleCardUI {
     )
 }
 
-private fun manaToList(mana: String): List<Char> {
-    val manaList = mutableListOf<Char>()
+private fun manaToList(mana: String): List<String> {
+    val manaList = mutableListOf<String>()
     for (i in mana.indices) {
-        if (mana[i] == '{') manaList.add(mana[i+1])
+        var temp = ""
+        if (mana[i] == '{') {
+            var j = 1
+            while (mana[i + j] != '}')  {
+                temp += mana[i+j++]
+            }
+            manaList.add(temp)
+        }
     }
 
     return manaList

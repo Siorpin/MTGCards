@@ -2,6 +2,7 @@ package com.example.mtgcards.mtg.presentation.cardScreen.components
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,6 +26,7 @@ fun SingleFacedCard(
         imageUri = card.image["art_crop"]
     )
     Spacer(modifier = Modifier.height(15.dp))
+    ManaCost(card.manaCost)
     CardInfoPanel(
         cardName = card.name,
         oracleText = card.oracleText
