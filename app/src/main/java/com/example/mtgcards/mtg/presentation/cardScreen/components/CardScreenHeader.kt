@@ -40,10 +40,7 @@ fun CardScreenHeader(
             )
     ) {
         IconButton(
-            onClick = onBackClick,
-            modifier
-                //.align(alignment = Alignment.TopStart)
-                //.padding(top = 27.dp)
+            onClick = onBackClick
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -66,7 +63,7 @@ fun CardScreenHeader(
                 imageVector = Icons.Default.Add,
                 contentDescription = null,
                 modifier = Modifier.size(30.dp)
-                )
+            )
         }
     }
 }

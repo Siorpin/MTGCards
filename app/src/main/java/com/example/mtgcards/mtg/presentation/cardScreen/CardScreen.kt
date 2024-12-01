@@ -24,6 +24,7 @@ import com.example.mtgcards.core.data.database.AppDatabase
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardInfoPanel
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenHeader
 import com.example.mtgcards.mtg.presentation.cardScreen.components.CardScreenImage
+import com.example.mtgcards.mtg.presentation.cardScreen.components.MultiFacedCard
 import com.example.mtgcards.mtg.presentation.cardScreen.components.SingleFacedCard
 
 @Composable
@@ -58,7 +59,11 @@ fun CardScreen(
                 CircularProgressIndicator()
             }
         } else {
-            if (state.multiFaces) Log.d("toto", "")
+            if (state.multiFaces) MultiFacedCard(
+                state.cards,
+                onBackClick = onBackClick,
+                onPlusClick = { viewModel.insertCard(cardName) }
+            )
             else {
                 Log.d("state", state.cards.toString())
                 SingleFacedCard(
