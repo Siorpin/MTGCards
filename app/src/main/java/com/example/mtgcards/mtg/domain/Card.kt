@@ -6,5 +6,6 @@ data class Card (
     val manaCost: String,
     val oracleText: String,
     val set: String,
-    val colorIdentity: List<String>
+    val colorIdentity: List<String>,
+    val legalities: Map<String, String>
 )

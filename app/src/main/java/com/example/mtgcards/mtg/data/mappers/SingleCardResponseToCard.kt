@@ -10,6 +10,7 @@ fun SingleCardResponse.toCard(): Card {
         colorIdentity = colorIdentity,
         image = imageUris.toMap(),
         manaCost = manaCost,
-        oracleText = oracleText
+        oracleText = oracleText,
+        legalities = legalities
     )
 }

@@ -7,16 +7,18 @@ data class SingleCardUI (
     val manaCost: List<String>,
     val oracleText: String,
     val setName: String,
-    val image: Map<String, String?>
+    val image: Map<String, String?>,
+    val legalities: Map<String, String>
 )
 
-fun Card.toCardUi(): SingleCardUI {
+fun Card.toSingleCardUi(): SingleCardUI {
     return SingleCardUI(
         name = name,
         manaCost = manaToList(manaCost),
         image = image,
         setName = set,
-        oracleText = oracleText
+        oracleText = oracleText,
+        legalities = legalities
     )
 }
 

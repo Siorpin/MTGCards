@@ -11,7 +11,8 @@ class SingleCardResponse (
     @SerializedName("oracle_text") val oracleText: String,
     @SerializedName("image_uris") val imageUris: ImageUris,
     @SerializedName("set_name") val setName: String,
-    @SerializedName("color_identity") val colorIdentity: List<String>
+    @SerializedName("color_identity") val colorIdentity: List<String>,
+    @SerializedName("legalities") val legalities: Map<String, String>
 ) {
     fun checkIfHasFaces(): MutableList<SingleCardResponse> {
         val facesList = mutableListOf<SingleCardResponse>()
@@ -23,7 +24,8 @@ class SingleCardResponse (
             oracleText,
             imageUris,
             setName,
-            colorIdentity
+            colorIdentity,
+            legalities
         ))
         else {
             cardFaces.forEach{ face ->
@@ -34,7 +36,8 @@ class SingleCardResponse (
                     face.oracleText,
                     face.imageUris,
                     setName,
-                    colorIdentity
+                    colorIdentity,
+                    legalities
                 ))
             }
         }

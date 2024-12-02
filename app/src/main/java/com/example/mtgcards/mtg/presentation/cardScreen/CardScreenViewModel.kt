@@ -7,7 +7,7 @@ import com.example.mtgcards.core.data.database.dao.CollectionDao
 import com.example.mtgcards.core.data.networking.BuildApiResponse
 import com.example.mtgcards.core.domain.CardsCollection
 import com.example.mtgcards.mtg.data.mappers.toCard
-import com.example.mtgcards.mtg.presentation.cardScreen.models.toCardUi
+import com.example.mtgcards.mtg.presentation.cardScreen.models.toSingleCardUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -61,7 +61,7 @@ class CardScreenViewModel(cardName: String, private val repository: CollectionDa
                 _state.update {
                     it.copy(
                         cards = response.map { item ->
-                            item.toCard().toCardUi()
+                            item.toCard().toSingleCardUi()
                         },
                         multiFaces = when(response.size) {
                             1 -> false
