@@ -76,4 +76,9 @@ class CardScreenViewModel(cardName: String, private val repository: CollectionDa
             _state.update { it.copy(isLoading = false) }
         }
     }
+
+    fun toggleIsImageZoomed() {
+        _state.update { it.copy(isImageZoomed = !_state.value.isImageZoomed) }
+        Log.d("zoom", state.value.isImageZoomed.toString())
+    }
 }

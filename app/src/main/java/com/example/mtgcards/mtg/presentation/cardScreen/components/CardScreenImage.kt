@@ -1,6 +1,7 @@
 package com.example.mtgcards.mtg.presentation.cardScreen.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ import com.example.mtgcards.R
 fun CardScreenImage(
     cardName: String,
     imageUri: String?,
+    onImageClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -26,6 +28,7 @@ fun CardScreenImage(
             .height(170.dp)
             .clip(RoundedCornerShape(16.dp))
             .fillMaxWidth()
+            .clickable { onImageClick() }
     ) {
         if (imageUri != null) {
             AsyncImage(

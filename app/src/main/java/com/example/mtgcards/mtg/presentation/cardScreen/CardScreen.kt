@@ -69,7 +69,9 @@ fun CardScreen(
                 SingleFacedCard(
                     onBackClick = onBackClick,
                     onPlusClick = { viewModel.insertCard(cardName) },
-                    card = state.cards.first()
+                    card = state.cards.first(),
+                    isImageZoomed = state.isImageZoomed,
+                    toggleImageZoom = { viewModel.toggleIsImageZoomed() }
                 )
             }
         }

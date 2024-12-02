@@ -41,7 +41,8 @@ fun MultiFacedCard(
             Column {
                 CardScreenImage(
                     cardName = card.name,
-                    imageUri = card.image["art_crop"]
+                    imageUri = card.image["art_crop"],
+                    onImageClick = {}
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 ManaCost(card.manaCost)
