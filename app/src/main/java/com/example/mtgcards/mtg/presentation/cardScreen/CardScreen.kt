@@ -59,20 +59,27 @@ fun CardScreen(
                 CircularProgressIndicator()
             }
         } else {
-            if (state.multiFaces) MultiFacedCard(
-                state.cards,
-                onBackClick = onBackClick,
-                onPlusClick = { viewModel.insertCard(cardName) }
-            )
-            else {
-                Log.d("state", state.cards.toString())
-                SingleFacedCard(
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                if (state.multiFaces) MultiFacedCard(
+                    state.cards,
                     onBackClick = onBackClick,
                     onPlusClick = { viewModel.insertCard(cardName) },
-                    card = state.cards.first(),
-                    isImageZoomed = state.isImageZoomed,
-                    toggleImageZoom = { viewModel.toggleIsImageZoomed() }
+                    toggleImageZoom = { viewModel.toggleIsImageZoomed() },
+                    isImageZoomed = state.isImageZoomed
                 )
+                else {
+                    Log.d("state", state.cards.toString())
+                    SingleFacedCard(
+                        onBackClick = onBackClick,
+                        onPlusClick = { viewModel.insertCard(cardName) },
+                        card = state.cards.first(),
+                        isImageZoomed = state.isImageZoomed,
+                        toggleImageZoom = { viewModel.toggleIsImageZoomed() }
+                    )
+                }
             }
         }
 

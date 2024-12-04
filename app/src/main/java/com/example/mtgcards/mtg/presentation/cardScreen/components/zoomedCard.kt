@@ -1,7 +1,10 @@
 package com.example.mtgcards.mtg.presentation.cardScreen.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,24 +26,23 @@ fun ZoomedCard(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .fillMaxSize()
-            .clickable { onBackgroundClick() }
     ) {
         Surface(
             color = Color(0xaa000000),
             modifier = Modifier
                 .matchParentSize()
+                .clickable { onBackgroundClick() }
         ) {
 
         }
         AsyncImage(
             model = imageString,
             contentDescription = null,
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Fit,
             modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.Center)
+                .matchParentSize()
                 .padding(40.dp)
+                .padding(bottom = 250.dp)
         )
     }
 }
